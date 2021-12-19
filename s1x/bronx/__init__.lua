@@ -1,4 +1,5 @@
 include("config")
+game:setdvar("sv_hostname","The Bronx Pack")
 game:setdvar("sv_cheats",1)
 game:setdvar("scr_sd_roundswitch",0)
 game:setdvar("scr_sd_timelimit",1.5)
