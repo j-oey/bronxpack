@@ -9,15 +9,18 @@ Check out this video to see everything from installing to using in game
 
 Here are the in game binds:
 
+
 [HOST ONLY]
 
 -Crouch + Dpad Left = save bot spawn and freeze them next round
 
 -Prone + Knife = clear bot spawn and unfreeze them next round
 
+
 [ALL PLAYERS]
 
 -Crouch + Knife = refill ammo and lethal equipment
+
 
 [OTHER FEATURES]
 
