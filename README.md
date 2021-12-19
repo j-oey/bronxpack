@@ -1,11 +1,12 @@
 # bronxpack
-a small iw6x/s1x trickshotting mod
+a small iw6x/s1x trickshotting mod i made using lua
 
 Currently set up for controller, but may work for kbm by changing some key binds
 
 [![Watch the video](https://img.youtube.com/vi/vNoh7xzT2Hg/maxresdefault.jpg)](https://www.youtube.com/watch?v=vNoh7xzT2Hg)
 
 Check out this video to see everything from installing to using in game
+Please give some form of credit if you use this code in your own creations
 
 Here are the in game binds:
 
