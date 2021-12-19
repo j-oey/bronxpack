@@ -1,0 +1,6 @@
+-the bind part is optional, you can just type them into console if you like
+-setting them to controller works too but the binds will go away when you close the game
+bind [key] ufo
+bind [key] god
+bind [key] fast_restart
+bind [key] spawnbot
