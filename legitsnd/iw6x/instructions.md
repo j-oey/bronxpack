@@ -6,3 +6,8 @@ the main changes are as follows:
 3) host can give an ammo crate (limited to host to avoid spam) the bind is crouch + dpad up
 4) on the 7th round the host will get a kem strike on spawn (score tied at 3-3)
 5) refill ammo bind now refills tacticals
+
+console commands you may want:
+1) pm_bouncing (toggles depatch bounces)
+2) g_enableelevators (toggles jump-crouch elevators)
+3) spawnbot (spawns a bot)
