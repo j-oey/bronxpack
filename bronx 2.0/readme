@@ -1,0 +1,12 @@
+please read this before asking any questions
+1) to spawn a bot it is different on both games
+  iw6x: type spawnbot in console while in game
+  s1x: add an enemy bot in the pregame lobby menu
+2) if the mod is not workinf please make sure you have the same file structure
+ **note the game folder may have a diffrent name**
+  iw6x_full_game/iw6x/scripts/setupsnr/__init__ and config
+  s1x_full_game/s1x/scripts/setupsnd/__init__ and config
+3) if there is no scripts folder, just make one
+4) if there is no iw6x/s1x folder, save a custom game mode and it will appear
+5) depatch bounces are on by default (pm_bouncing 1 or 0 toggles it)
+6) please watch the video on the main page by clicking on the image, it should answer most other questions
