@@ -30,4 +30,4 @@ g5prestige = 30
     *Crouch + Dpad Left(+actionslot 3) = Save Bot Spawn/Activate Setup Mode
     *Prone + Knife = Clear Bot Spawn/Activate Unsetup Mode
 
-]]--
+]] -- 
