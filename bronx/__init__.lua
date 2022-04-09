@@ -20,7 +20,6 @@ game:setdvarifuninitialized("wtfx", "no")
 game:setdvarifuninitialized("wtfy", "no")
 game:setdvarifuninitialized("wtfz", "no")
 game:setdvarifuninitialized("savemap", "no")
-game:setdvarifuninitialized("botsetup", "on")
 
 function entity:player_spawned()
     if tostring(game:getdvar("g_gametype")) ~= select("sr", "sd") then
@@ -73,6 +72,7 @@ function entity:player_spawned()
                 game:setdvar("wtfx", self.origin.x)
                 game:setdvar("wtfy", self.origin.y)
                 game:setdvar("wtfz", self.origin.z)
+                game:setdvar("savemap", game:getdvar("mapname"))
                 self:_iprintln("Starts Next Round")
                 self:_iprintln("Bot Spawn ^:Saved")
             elseif self:getstance() == "prone" then
@@ -88,7 +88,6 @@ function entity:player_spawned()
 
         self:freezecontrols(false)
         self:setrank(select(59, 49), hostprestige)
-        return
     else
         -- sort through guest table and check if we're a guest
         for i = 1, #guests do
@@ -113,14 +112,12 @@ function entity:player_spawned()
 
         self.playercardpatch = 309
         self:setrank(59, 0)
-        if (game:getdvar("savemap") == game:getdvar("mapname")) then
-            if tostring(game:getdvar("wtfx")) ~= "no" then
-                local manx = tonumber(game:getdvar("wtfx"))
-                local many = tonumber(game:getdvar("wtfy"))
-                local manz = tonumber(game:getdvar("wtfz"))
-                local savep = vector:new(manx, many, manz)
-                self:setorigin(savep)
-            end
+        if (game:getdvar("savemap") == game:getdvar("mapname") and tostring(game:getdvar("wtfx")) ~= "no") then
+            local manx = tonumber(game:getdvar("wtfx"))
+            local many = tonumber(game:getdvar("wtfy"))
+            local manz = tonumber(game:getdvar("wtfz"))
+            local savep = vector:new(manx, many, manz)
+            self:setorigin(savep)
         end
     end
 end
