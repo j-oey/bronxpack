@@ -1,135 +1,118 @@
+include("utils")
+if (not gamename()) then
+    print("Unsupported game for bronxpack")
+    return
+end
 
-
--- bronxpack mod
 include("config")
+
+-- dvars
 game:setdvar("sv_hostname", "The Bronx Pack")
 game:setdvar("sv_cheats", 1)
 game:setdvar("scr_sd_roundswitch", 0)
-game:setdvar("scr_sd_timelimit", 1.5)
+game:setdvar("scr_sd_timelimit", select(2.5, 1.5))
 game:setdvar("scr_sd_planttime", 1)
 game:setdvar("scr_sr_roundswitch", 0)
-game:setdvar("scr_sr_timelimit", 1.5)
+game:setdvar("scr_sr_timelimit", select(2.5, 1.5))
 game:setdvar("scr_sr_planttime", 1)
 game:setdvar("pm_bouncing", 1)
 game:setdvarifuninitialized("wtfx", "no")
 game:setdvarifuninitialized("wtfy", "no")
 game:setdvarifuninitialized("wtfz", "no")
+game:setdvarifuninitialized("savemap", "no")
+game:setdvarifuninitialized("botsetup", "on")
 
-function setup(player)
-    if player.name == gamehost then -- host
-        player:notifyonplayercommand("savebind", "+actionslot 3")
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            elseif player:getstance() == "prone" then
-                clearpos(player)
-            end
-        end)
-        player:onnotify("savebind", function()
-            if player:getstance() == "crouch" then
-                savepos(player)
-            end
-        end)
-        player:freezecontrols(false)
-        player:setrank(49, hostprestige)
-    elseif player.name == guest1 then
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            else
-            end
-        end)
-        player:setrank(49, g1prestige)
-    elseif player.name == guest2 then
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            else
-            end
-        end)
-        player:setrank(49, g2prestige)
-    elseif player.name == guest3 then
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            else
-            end
-        end)
-        player:setrank(49, g3prestige)
-    elseif player.name == guest4 then
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            else
-            end
-        end)
-        player:setrank(49, g4prestige)
-    elseif player.name == guest5 then
-        player:iclientprintln("^:" .. gamehost .. "^1 is Host")
-        player:notifyonplayercommand("refillbind", "+melee_zoom")
-        player:onnotify("refillbind", function()
-            if player:getstance() == "crouch" then
-                refill(player)
-            else
-            end
-        end)
-        player:setrank(49, g5prestige)
-    else
-        if tostring(game:getdvar("wtfx")) == "no" then
-        else
-            local manx = tonumber(game:getdvar("wtfx"))
-            local many = tonumber(game:getdvar("wtfy"))
-            local manz = tonumber(game:getdvar("wtfz"))
-            local savep = vector:new(manx, many, manz)
-            game:oninterval(function()
-                player:freezecontrols(true)
-            end, 5)
-            player:setorigin(savep)
-        end
-        player:setrank(49, 0)
+function entity:player_spawned()
+    if tostring(game:getdvar("g_gametype")) ~= select("sr", "sd") then
+        self:iprintlnbold("Please switch game mode to ^:" .. select("Search & Rescue", "Search & Destroy"))
+        return
     end
-    player:iclientprintln("Welcome to The Bronx Pack by ^:@plugwalker47")
-end
 
-function clearpos(player)
-    if tostring(game:getdvar("wtfx")) == "no" then
-    else
-        game:executecommand("wtfx no")
-        player:iclientprintln("Starts Next Round")
-        player:iclientprintln("Bot Spawn ^:Cleared")
-    end
-end
+    self:setclientomnvar("ui_round_end_match_bonus", math.random(230, 1800))
+    self:setclientomnvar("ui_disable_team_change", 1)
+    self:iprintln("Welcome to The Bronx Pack by ^:@plugwalker47")
 
-function savepos(player)
-    game:executecommand("wtfx " .. player.origin.x)
-    game:executecommand("wtfy " .. player.origin.y)
-    game:executecommand("wtfz " .. player.origin.z)
-    player:iclientprintln("Starts Next Round")
-    player:iclientprintln("Bot Spawn ^:Saved")
-end
-
-function refill(player)
-    player:givemaxammo(player:getcurrentweapon())
-    player:givestartammo(player:getcurrentoffhand())
-end
-
-function init(player)
-    game:onplayerdamage(function(_self, inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc)
-        if game:weaponclass(weapon) == "sniper" then
-            damage = 999
-        elseif game:weaponclass(weapon) == "suicide" then
-            damage = 999
-        else
-            damage = 1
+    -- binds
+    self:notifyonplayercommand("refillbind", "+melee_zoom")
+    self:onnotify("refillbind", function()
+        if self:getstance() == "crouch" then
+            self:givemaxammo(self:getcurrentweapon())
+            self:givestartammo(self:getcurrentoffhand())
         end
-        return damage
     end)
+
+    self:notifyonplayercommand("streakbind", "+actionslot 1")
+    self:onnotify("streakbind", function()
+        if self:getstance() == "crouch" then
+            select_func(function()
+                self:givekillstreak("deployable_ammo", 0)
+            end, function()
+                -- questionable streak giving, its from bronx 2.0 so i'll leave here as im lazy - mikey
+                self:giveweapon("turretheadenergy_mp")
+                self:switchtoweapon("turretheadenergy_mp")
+            end)
+        end
+    end)
+
+    -- do player-specific stuff here
+    if self:ishost() then
+        -- code for the game's scores
+        if game:getteamscore("axis") == 0 and game:getteamscore("allies") == 0 then
+            self:iclientprintlnbold("Player status ^:Host")
+        elseif gamename() == "iw6x" and game:getteamscore("axis") == 3 and game:getteamscore("allies") == 3 then
+            self.pers["kills"] = 25
+            self.kills = 25
+            self.pers["score"] = 2350
+            self.score = 2200
+            self:givekillstreak("nuke", 25)
+            game:executecommand("g_enableElevators 1")
+        end
+
+        self:notifyonplayercommand("savebind", "+actionslot 3")
+        self:onnotify("savebind", function()
+            if self:getstance() == "crouch" then
+                game:setdvar("wtfx", self.origin.x)
+                game:setdvar("wtfy", self.origin.y)
+                game:setdvar("wtfz", self.origin.z)
+                self:iprintln("Starts Next Round")
+                self:iprintln("Bot Spawn ^:Saved")
+            elseif self:getstance() == "prone" then
+                if (game:getdvar("wtfx") ~= "no") then
+                    game:setdvar("wtfx", "no")
+                    game:setdvar("wtfy", "no")
+                    game:setdvar("wtfz", "no")
+                    self:iprintln("Starts Next Round")
+                    self:iprintln("Bot Spawn ^:Cleared")
+                end
+            end
+        end)
+
+        self:freezecontrols(false)
+        self:setrank(select(59, 49), hostprestige)
+        return
+    end
+
+    -- the host doesn't see this cuz we return in his code
+    if game:getteamscore("axis") == 0 and game:getteamscore("allies") == 0 then
+        self:iclientprintlnbold("Player status ^:Verified")
+    end
 end
 
-level:onnotify("connected", init)
-level:onnotify("player_spawned", setup)
+-- connected/player spawned listener
+level:onnotify("connected", function(player)
+    player:onnotifyonce("player_spawned", function()
+        player:player_spawned()
+    end)
+end)
+
+-- damage override
+game:onplayerdamage(function(_self, inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc)
+    if game:weaponclass(weapon) == "sniper" then
+        damage = 999
+    elseif game:weaponclass(weapon) == "suicide" then
+        damage = 999
+    else
+        damage = 1
+    end
+    return damage
+end)
