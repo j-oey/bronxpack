@@ -33,11 +33,19 @@ function select_func(iw6x, s1x)
 end
 
 -- custom iprintln to support both games
-function entity:iprintln(string)
+function entity:_iprintln(string)
     if (gamename() == "iw6x") then
         self:iprintln(string)
     elseif (gamename() == "s1x") then
         self:iclientprintln(string)
+    end
+end
+
+function entity:_iprintlnbold(string)
+    if (gamename() == "iw6x") then
+        self:iprintlnbold(string)
+    elseif (gamename() == "s1x") then
+        self:iclientprintlnbold(string)
     end
 end
 
