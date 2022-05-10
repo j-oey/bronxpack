@@ -122,6 +122,7 @@ function setup(player)
                 player:givemaxammo("iw5_dlcgun12loot7_mp")
             end
         elseif player.team == "axis" then
+	if game:isbot(player) == 1 then
             game:oninterval(function ()
             player:disableusability(true)
             player:setrank(49,0)
@@ -143,6 +144,7 @@ function setup(player)
             player:givemaxammo("iw5_kf5_mp")
             player:setspawnweapon("iw5_kf5_mp")
             player:iclientprintlnbold("Player status ^1Unknown")
+	end
         end
         if game:getdvar("unsetup") == "0" then
             player:iclientprintln("S1x Setup S&D by ^:@plugwalker47")
