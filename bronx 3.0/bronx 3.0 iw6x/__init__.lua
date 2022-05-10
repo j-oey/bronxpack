@@ -5,7 +5,6 @@ game:setdvar("scr_player_healthregentime",5)
 game:setdvar("g_playercollision",0)
 game:setdvar("g_playerejection",0)
 game:setdvar("perk_bulletpenetrationmultiplier",40)
-game:setdvar("jump_enablefalldamage",1)
 game:setdvarifuninitialized("botx","no")
 game:setdvarifuninitialized("boty","no")
 game:setdvarifuninitialized("botz","no")
@@ -229,7 +228,6 @@ function init(player)
     game:onplayerdamage(function(_self, inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc)
         if game:weaponclass(weapon) == "sniper" then
             damage = 999
-            game:executecommand("jump_enablefalldamage 0")
         elseif weapon == "throwingknife_mp"  then
             damage = 999
         elseif mod == "MOD_UNKNOWN" and weapon == "none"  then
