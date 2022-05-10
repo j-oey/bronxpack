@@ -91,6 +91,7 @@ function setup(player)
                 player:iprintlnbold("Host has ^:KEM Strike ^7Available")
             end
         elseif player.team == "axis" then
+	if game:isbot(player) == 1 then
             player.playercardpatch = 121
             game:oninterval(function ()
             player:disableusability(true)
@@ -114,6 +115,7 @@ function setup(player)
             player:givemaxammo("iw6_microtar_mp")
             player:setspawnweapon("iw6_microtar_mp")
             player:iprintlnbold("Player status ^1Unknown")
+	end
         end
         if game:getdvar("unsetup") == "0" then
             player:iprintln("IW6x Setup S&D by ^:@plugwalker47")
