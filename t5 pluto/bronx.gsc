@@ -50,6 +50,14 @@ onplayerspawned()
 			self freezecontrols(false);
 			self thread setupbots();
 			self thread movebotbind();
+			if(getdvar("mapname") == "mp_hotel")
+			{
+				array = getEntArray("trigger_hurt","classname");
+				{
+					for(m=0;m < array.size;m++)array[m].origin+=(0,100000,0);
+					// removes death barriers on hotel
+				}
+			}
 			if ( getteamscore( "allies" ) == 0 && getteamscore( "axis" ) == 0)
 			{
 				self iprintlnbold("Player status ^:Host");
