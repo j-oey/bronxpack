@@ -21,7 +21,7 @@ A- download this zip file and replace the files in your players2 folder <br />
 # Download Links for Individual Games <br />
 IW6x - link coming soon <br />
 S1x - link coming soon <br />
-# Basic Features <br />
+# Basic Features (*IW6x/S1x*) <br />
 -only sniper rifles can kill (and marksman rifles on iw6x) <br />
 -fake public match with match bonus <br />
 -bot can either bet setup (frozen in one place) or unsetup (moves around the map) <br />
@@ -38,6 +38,10 @@ S1x - link coming soon <br />
 -the mod automatically setups up the game rules for you <br />
 -when in game type "spawnbot" in console to add a bot <br />
 -if playing unsetup 2 bots is helpful as they dont always go to good places <br />
+## (Plutonium T5) *work in progress*
+-choose the game mode search and destory <br />
+-the mod automatically setups up the game rules for you <br />
+-bot auto connects in when host spawns on first round <br />
 # In Game Commands/Functions
 ## (S1x)
 ### Host Only
@@ -72,3 +76,20 @@ S1x - link coming soon <br />
 -the config file still exists but it is only for picking prestige <br />
 -refill ammo to get steady aim (free up class space for overkill) <br />
 -must refill ammo after every class change to get perks <br />
+## (Plutonium T5) *work in progress*
+### Host Only
+-crouch + dpad left = save bot spawn to crosshair <br />
+### All Players
+-crouch + knife = refill ammo and equipment <br />
+-crouch + dpad up = drop canswap <br />
+-crouch + dpad up = give care package <br />
+### Other Notes
+-lightweight pro is given on spawn <br />
+-health is miniscule always so do not tag <br />
+-classes can be changed whenever <br />
+-depatch bounces are enabled by default <br />
+-bullet penetration is extremely high to avoid hitmarkers <br />
+-refilling ammo with certain pistols will give a sniper as follows: <br />
+	Makarov + Upgraded Sights = L96A1 <br />
+	M1911 + Upgraded Sights = PSG1 <br />
+-bot auto spawns when the host spawns in on the first round <br />
