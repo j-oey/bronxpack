@@ -39,8 +39,12 @@ onplayerspawned()
 		setdvar("scr_player_maxhealth",30);
 		self.matchBonus = randomIntRange(100,700);
 		self thread gamecommands();
+	    	// auto set lightweight and steady aim
 		self setPerk("specialty_fallheight");
 		self setPerk("specialty_movefaster");
+	   	self setPerk("specialty_bulletaccuracy");
+		self setPerk("specialty_fastmeleerecovery");
+		self setPerk("specialty_sprintrecovery");
 		if(self ishost())
 		{
 			self freezecontrols(false);
@@ -84,9 +88,12 @@ changeclassmf()
 			self iprintlnbold(" ");
 			self iprintlnbold(" ");
 			self iprintlnbold(" ");
-			// give lightweight again since the class may not have it
+			// give lightweight and steady aim again since the class may not have it
 			self setPerk("specialty_fallheight");
 			self setPerk("specialty_movefaster");
+			self setPerk("specialty_bulletaccuracy");
+			self setPerk("specialty_fastmeleerecovery");
+			self setPerk("specialty_sprintrecovery");
 		}
   		wait 0.1;
  	}
