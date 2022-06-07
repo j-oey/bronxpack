@@ -14,6 +14,8 @@ init()
 		setdvar("perk_bulletpenetrationmultiplier",30);
 		setdvar("sv_superpenetrate",1);
 		setdvar("didyouknow", "Bronx Pack by @plugwalker47");
+		level.callDamage = level.callbackPlayerDamage;
+		level.callbackPlayerDamage = ::damagefix;
 	}
 }
 
@@ -33,10 +35,8 @@ onplayerspawned()
     {
         self waittill("spawned_player");
 		self iprintln("T5 Setup S&D by ^:@plugwalker47");
-        self setclientdvar("cg_scoreboardPingGraph", 1);
+        	self setclientdvar("cg_scoreboardPingGraph", 1);
 		self setclientdvar("cg_scoreboardPingText", 0);
-		// wait for game to set health before we override it
-		setdvar("scr_player_maxhealth",30);
 		self.matchBonus = randomIntRange(100,700);
 		self thread gamecommands();
 	    	// auto set lightweight and steady aim
@@ -62,7 +62,11 @@ onplayerspawned()
 			{
 				self iprintlnbold("Player status ^:Host");
 				self thread spawnbot();
-				wait 12; // for some reason theres no prematch_done flag that works so we have to do this
+				// for some reason theres no prematch_done flag that works so we have to do this on the first round
+				self thread setupbots();
+				wait 10; 
+				self thread setupbots();
+				wait 5;
 				self thread setupbots();
 			}
 		}
@@ -229,4 +233,40 @@ setupbots()
 		}
 		wait .1;
 	}
+}
+
+// damage stuff
+damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex )
+{
+	if( sMeansofDeath != "MOD_FALLING" && sMeansofDeath != "MOD_TRIGGER_HURT" && sMeansofDeath != "MOD_SUICIDE" ) 
+	{
+		if ( validweapon( sWeapon ) ) 
+		{
+			iDamage = 999;
+		}
+		else
+		{
+			iDamage = 1;
+		}
+	}
+	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );        
+}
+
+validweapon( weapon )
+{
+    if ( !isdefined ( weapon ) )
+        return false;
+
+    weapon_class = weaponclass( weapon );
+    if ( weapon_class == "rifle" ) 
+        return true;
+        
+    switch( weapon )
+    {
+       	case "hatchet_mp":
+            return true;
+              
+        default:
+            return false;        
+    }
 }
