@@ -13,6 +13,7 @@ init()
 		setdvar("penetrationcount",10);
 		setdvar("perk_bulletpenetrationmultiplier",30);
 		setdvar("sv_superpenetrate",1);
+		setDvar("jump_slowdownEnable", 0);
 		setdvar("didyouknow", "Bronx Pack by @plugwalker47");
 		level.callDamage = level.callbackPlayerDamage;
 		level.callbackPlayerDamage = ::damagefix;
