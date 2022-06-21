@@ -22,10 +22,6 @@ A- click on the green code button on the main page of this repository, and click
 Q- how do i get tac inserts and tks on s1x? <br />
 A- download this zip file and replace the files in your players2 folder <br />
 [S1x Tac Insert/Throwing Knife Player Data Files](https://drive.google.com/file/d/1id8WatOmAC8nVLZZO45oBVlUnP1dT1Wr/view) <br />
-# Download Links for Individual Games <br />
-IW6x - link coming soon <br />
-S1x - link coming soon <br />
-T5 Pluto - link coming soon <br />
 # How to Connect to Friends <br />
 These methods may not work, as some people just cannot connect to eachother, if that is the case find a host everyone can connect to <br />
 ## (IW4x/IW6x/S1x)
