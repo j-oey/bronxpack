@@ -1,0 +1,7 @@
+-download whole repository by clicking the green "code" button and selecting download as zip
+-copy and paste this address into windows explorer
+	%localappdata%/Plutonium/storage/t6
+-you might already have a folder called scripts in here, if not make it and make another folder called mp
+-in this mp folder put the bronx-compiled.gsc file
+-load up a private match and the mod should work, if not check your files to make sure they match this:
+	%localappdata%/Plutonium/storage/t6/scripts/mp/bronx-compiled.gsc

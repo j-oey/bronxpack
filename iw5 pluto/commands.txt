@@ -1,0 +1,15 @@
+-only works in the Search & Destroy gametype
+-bot auto spawns when the host spawns in on the first round
+-host is given a moab on the last round (score tied 3-3)
+-save bot spawn is crouch + dpad left (+actionslot 3)
+-drop canswap is crouch + dpad up (+actionslot 1)
+-give ballistic vest is prone + dpad up (+actionslot 1)
+-give pred missile vest is prone + dpad down (+actionslot 2)
+-refill ammo and equipment is crouch + knife (+melee/+melee_zoom)
+-quickdraw pro and dead silence pro are given on spawn
+-snipers kill in one bullet
+-classes can be changed whenever
+-depatch bounces are enabled by default
+-bullet penetration is extremely high to avoid hitmarkers
+-double taps are enabled as well
+-to rename your bots make a text file in the scripts folder and call it "bots"

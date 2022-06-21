@@ -1,0 +1,18 @@
+-only works in the Search & Destroy gametype
+-bot auto spawns when the host spawns in on the first round
+-save bot spawn is crouch + dpad left (+actionslot 3)
+-drop canswap is crouch + dpad up (+actionslot 1)
+-give care package is prone + dpad up (+actionslot 1)
+-give predator missile is prone + dpad down (+actionslot 2)
+-refill ammo and equipment is crouch + knife (+melee/+melee_zoom)
+-snipers kill in one bullet
+-killcam softlands can be toggled with the "g_softland" dvar in console
+-classes can be changed whenever
+-depatch bounces are enabled by default
+-at the end of game it picks a random map, i took some like wasteland, those you gotta pick in the pregame menu
+-steady aim and commando pro are given on spawn
+-bullet penetration is extremely high to avoid hitmarkers
+-the host can also use the cfg command "+skip" to skip the current map
+-also added funny console ui (shoutout aerosol)
+-everyone must download the mod in order to play, and everyone must have the same exact mod files, if you change one thing, so does everyone else.
+-changing bot names is done within "iw4x_full_game/iw4x/iw4x_00.iwd" (in there is a bots.txt file that will work across the whole client)

@@ -1,0 +1,11 @@
+-only works in the Search & Destroy gametype
+-snipers kill in one bullet and everything else has normal damage
+-bot auto spawns when the host spawns in on the first round
+-save bot spawn is crouch + dpad left (+actionslot 3)
+-drop canswap is crouch + dpad up (+actionslot 1)
+-fill streaks is prone + dpad up (+actionslot 1)
+-refill ammo and equipment is crouch + knife (+melee/+melee_zoom)
+-health is miniscule always so do not tag
+-classes can be changed whenever
+-depatch bounces are enabled by default
+-bullet penetration is extremely high to avoid hitmarkers

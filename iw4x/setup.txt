@@ -1,0 +1,8 @@
+-download whole repository by clicking the green "code" button and selecting download as zip
+-find your game address by clicking on the xlabs launcher then clicking the gear in the bottom left, then copy the location named "Modern Warfare 2 Installation"
+-you might already have a folder called mods in here, if not make it and put the "iw4xbronx" folder inside here
+-then load up the mod bby clicking the mods option at the main menu and selecting "iw4xbronx"
+-load up a private match and the mod should work, if not check your files to make sure they look like this:
+	C:\Program Files (x86)\Steam\steamapps\common\Modern Warfare 2\mods\iw4xbronx
+
+-everyone must download the mod in order to play, and everyone must have the same exact mod files, if you change one thing, so does everyone else.
