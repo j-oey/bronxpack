@@ -43,13 +43,13 @@ These methods may not work, as some people just cannot connect to eachother, if 
 IW4x -https://xlabs.dev/mod_guide <br />
 -put the iw4xbronx folder in your mods folder <br />
 IW6x/S1x - [The Complete Bronx Pack Tutorial (IW6x/S1x)](https://www.youtube.com/watch?v=MZ1bKhVFUTA) <br />
--this 10 minute video explains everything for the iw6x/s1x versions
+-this 10 minute video explains everything for the iw6x/s1x versions <br />
 T5 Plutonium - https://twitter.com/plugwalker47/status/1533631002601455616 <br />
--put bronx.gsc in %localappdata%\Plutonium\storage\t5\scripts
+-put bronx.gsc in %localappdata%\Plutonium\storage\t5\scripts <br />
 IW5 Plutonium - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-iw5 <br />
--put bronx_iw5.gsc in %localappdata%\Plutonium\storage\iw5\scripts
+-put bronx_iw5.gsc in %localappdata%\Plutonium\storage\iw5\scripts <br />
 T6 Plutonium - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-t6 <br />
--put bronx_t6.gsc in %localappdata%\Plutonium\storage\t6\scripts\mp
+-put bronx_t6.gsc in %localappdata%\Plutonium\storage\t6\scripts\mp <br />
 # Lobby Setup
 ## (IW4x)
 -choose the game mode search and destory <br />
@@ -84,7 +84,7 @@ T6 Plutonium - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-
 ## (IW4x)
 ### Host Only
 -crouch + dpad left = save bot spawn to crosshair <br />
--killcam softlands can be toggled with the "g_softland" dvar in console <br />
+-killcam softlands can be toggled with the "g_softland" dvar in console (1/0 is on/off respectively) <br />
 -use the cfg command "+skip" to skip the current map <br />
 ### All Players
 -crouch + dpad up = drop canswap <br />
