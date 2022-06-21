@@ -271,7 +271,7 @@
 			textscale 0
 			textstyle 0
 			background "cardicon_expert_m21"
-			visible when(dvarint( "gpad_in_use" ) && dvarbool( "gpad_enabled" ) && !dvarint( "gpad_style" ) )
+			visible when(dvarint( "gpad_in_use" ) && dvarbool( "gpad_enabled" ) && !dvarint( "gpad_style" ) && ( player( "stockAmmo" ) ) > 0 )
 		}
 		itemDef
 		{
@@ -285,7 +285,7 @@
 			textscale 0
 			textstyle 0
 			background "cardicon_expert_fn2000"
-			visible when(dvarint( "gpad_in_use" ) && dvarbool( "gpad_enabled" ) && dvarint( "gpad_style" ) )
+			visible when(dvarint( "gpad_in_use" ) && dvarbool( "gpad_enabled" ) && dvarint( "gpad_style" ) && ( player( "stockAmmo" ) ) > 0 )
 		}
 	}
 }
