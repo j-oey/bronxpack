@@ -3,8 +3,8 @@
 #include common_scripts\utility;
 
 init()
-{
-	if(getdvar("g_gametype") == "sd")
+{	
+	if(getdvar("g_gametype") == "sd" && getDvarInt("sv_cheats") == 0)
 	{
 		level thread onplayerconnect();
 		setdvar("sv_hostname","Bronx, NY [Setup]");
@@ -13,10 +13,11 @@ init()
 		setdvar("penetrationcount",10);
 		setdvar("perk_bulletpenetrationmultiplier",30);
 		setdvar("sv_superpenetrate",1);
-		setDvar("jump_slowdownEnable", 0);
+		setdvar("sv_cheats",0);
 		setdvar("didyouknow", "Bronx Pack by @plugwalker47");
 		level.callDamage = level.callbackPlayerDamage;
 		level.callbackPlayerDamage = ::damagefix;
+		level.prematchPeriod = 0;
 	}
 }
 
@@ -26,6 +27,12 @@ onplayerconnect()
     {
         level waittill("connected", player);
         player thread onplayerspawned();
+		game["strings"]["change_class"] = " ";
+		if(!isDefined(player.pers["isBot"]) && player.pers["team"] != "allies")
+		{
+			// ghetto auto assign thing
+			player thread setupplayer();
+		}
     }
 }
 
@@ -36,11 +43,11 @@ onplayerspawned()
     {
         self waittill("spawned_player");
 		self iprintln("T5 Setup S&D by ^:@plugwalker47");
-        	self setclientdvar("cg_scoreboardPingGraph", 1);
+        self setclientdvar("cg_scoreboardPingGraph", 1);
 		self setclientdvar("cg_scoreboardPingText", 0);
 		self.matchBonus = randomIntRange(100,700);
 		self thread gamecommands();
-	    	// auto set lightweight and steady aim
+	    // auto set lightweight and steady aim
 		self setPerk("specialty_fallheight");
 		self setPerk("specialty_movefaster");
 	   	self setPerk("specialty_bulletaccuracy");
@@ -56,10 +63,9 @@ onplayerspawned()
 				array = getEntArray("trigger_hurt","classname");
 				{
 					for(m=0;m < array.size;m++)array[m].origin+=(0,100000,0);
-					// removes death barriers on hotel
 				}
 			}
-			if ( getteamscore( "allies" ) == 0 && getteamscore( "axis" ) == 0)
+			if (getteamscore("allies") == 0 && getteamscore("axis") == 0)
 			{
 				self iprintlnbold("Player status ^:Host");
 				self thread spawnbot();
@@ -93,14 +99,6 @@ changeclassmf()
 		{
 			self maps\mp\gametypes\_class::giveloadout(self.pers["team"],self.pers["class"]);
 			oldclass = self.pers["class"];
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
-			self iprintlnbold(" ");
 			// give lightweight and steady aim again since the class may not have it
 			self setPerk("specialty_fallheight");
 			self setPerk("specialty_movefaster");
@@ -270,4 +268,14 @@ validweapon( weapon )
         default:
             return false;        
     }
+}
+
+setupplayer()
+{
+	self maps\mp\gametypes\_globallogic_ui::closeMenus();
+	self.pers["team"] = "allies";
+	self.team = "allies";
+	self.pers["class"] = undefined;
+	self.class = undefined;
+	self maps\mp\gametypes\_globallogic_ui::beginClassChoice();
 }
