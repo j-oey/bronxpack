@@ -166,6 +166,7 @@
 			visible 1
 			forecolor 1 1 1 1
 			textfont 3
+			textstyle 3
 			textalign 4
 			textaligny 4
 			textscale 0.375
@@ -180,6 +181,7 @@
 			forecolor 1 0.8 0.4 1
 			textfont 9
 			textalign 4
+			textstyle 3
 			textalignx 40
 			textaligny -26
 			textscale 0.5833
@@ -217,6 +219,7 @@
 			visible 1
 			forecolor 1 1 1 1
 			textfont 3
+			textstyle 3
 			textalign 4
 			textaligny 4
 			textscale 0.375
@@ -231,6 +234,7 @@
 			forecolor 1 0.8 0.4 1
 			textfont 9
 			textalign 4
+			textstyle 3
 			textalignx 80
 			textaligny -26
 			textscale 0.5833
