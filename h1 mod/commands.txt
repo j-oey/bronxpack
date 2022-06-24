@@ -1,0 +1,14 @@
+mod folder layout is "MWR Game Folder/h1-mod/scripts/mp/h1bronx/__init__.lua"
+
+-only works in the Search & Destroy gametype
+-snipers kill in one bullet and everything else has normal damage
+-add an enemy bot in the pregame menu, adding one in game causes issues
+-save bot spawn is crouch + dpad left (+actionslot 4) setup mode only
+-drop canswap is crouch + dpad up (+actionslot 1) rpd with acog
+-to toggle setup/unsetup mode do prone + dpad up (+actionslot 1) this updates next round
+-refill ammo and equipment is crouch + knife (+melee/+melee_zoom)
+-depatch bounces are enabled by default
+-fall damage is disabled
+-night vision is disabled, you can turn it on with "nightvisiondisableeffects 1"
+-jump crouch elevators are enabled, but beware the map barriers suck
+-make sure you ban custom classes from using last stand, please
