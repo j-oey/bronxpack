@@ -164,6 +164,7 @@ function entity:canswap()
 end
 
 game:onplayerdamage(function(_self, inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc)
+    _self:unsetperk("specialty_pistoldeath" , true)
     if game:weaponclass(weapon) == "sniper" and attacker.team == "allies" then
         damage = 999
     elseif attacker.team == "axis" then
