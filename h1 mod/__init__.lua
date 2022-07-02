@@ -158,7 +158,7 @@ end
 function entity:tp()
 
     local savetp = vector:new(game:getdvarint("selfx"), game:getdvarint("selfy"), game:getdvarint("selfz"))
-    self:setorigin(savep)           
+    self:setorigin(savetp)           
      
 end
 
