@@ -105,6 +105,13 @@ function entity:binds()
     end
 end
 
+function vector:scale(scale)
+    self.x = self.x * scale
+    self.y = self.y * scale
+    self.z = self.z * scale
+    return self
+end
+
 function entity:botsetup()
     self:takeallweapons()
     self:giveweapon("h1_p90_mp")
@@ -148,10 +155,10 @@ function entity:tpsave()
     local forward = self:gettagorigin("j_head")
     local endvec = game:anglestoforward(self:getplayerangles())
     local endd = endvec:scale(1000000)
-    local cross = game:bullettrace(forward, endd, 0, self)["position"]
-    game:executecommand("selfx " .. cross.x)
-    game:executecommand("selfy " .. cross.y)
-    game:executecommand("selfz " .. cross.z)
+    -- local cross = game:bullettrace(forward, endd, 0, self)["position"]
+    game:executecommand("selfx " .. self.x)
+    game:executecommand("selfy " .. self.y)
+    game:executecommand("selfz " .. self.z)
     self:clientiprintln("Position : ^2Saved")
 end
 
@@ -173,12 +180,6 @@ function entity:loadpos()
     end
 end
 
-function vector:scale(scale)
-    self.x = self.x * scale
-    self.y = self.y * scale
-    self.z = self.z * scale
-    return self
-end
 
 function entity:refill()
     self:givemaxammo(self:getcurrentweapon())
