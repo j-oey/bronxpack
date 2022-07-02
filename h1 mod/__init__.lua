@@ -20,31 +20,31 @@ function entity:setup()
             self:binds()
             self:freezecontrols(false)
             if game:getteamscore("axis") == 0 and game:getteamscore("allies") == 0 then
-                self:clientiprintln("Player Status ^:Host")
+                self:clientiprintln("Player Status : ^2Host")
             end
         elseif self.team == "allies" then
             self:binds()
             if game:getteamscore("axis") == 0 and game:getteamscore("allies") == 0 then
-                self:clientiprintln("Player Status ^2Verified")
+                self:clientiprintln("Player Status : ^2Verified")
             end
         elseif self.team == "axis" then
             self:botsetup()
-            self:clientiprintln("Player Status ^1Unknown")
+            self:clientiprintln("Player Status : ^1Unknown")
         end
         if game:getdvarint("unsetup") == 1 then
-            game:setdvar("sv_hostname","Bronx, NY [Unsetup]")
-            self:clientiprintln("MWR Unsetup S&D by ^:@plugwalker47")
+            game:setdvar("sv_hostname", "twitter.com/1G18")
+            self:clientiprintln("Obscurity by : ^6@1G18")
             --do this so we cant move the bot in unsetup mode
             truemode = 1
         else
-            game:setdvar("sv_hostname","Bronx, NY [Setup]")
-            self:clientiprintln("MWR Setup S&D by ^:@plugwalker47")
+            game:setdvar("sv_hostname","twitter.com/1G18")
+            self:clientiprintln("Obscurity by : ^6@1G18")
             --my ocd needs this to be here even though its already stated
             truemode = 0
         end
         game:oninterval(function () self:omnvars() end,5)
     else
-        self:clientiprintln("Bronx Pack does not support ^:" .. game:getdvar("party_gametype") )
+        self:clientiprintln("^3Obscurity only works in Search and Destroy.")
     end
 end
 
@@ -73,15 +73,24 @@ function entity:binds()
     self:notifyonplayercommand("canswapbind", "+actionslot 1")
     self:notifyonplayercommand("refillbind", "+melee_zoom")
     self:notifyonplayercommand("refillbind", "+melee")
-    self:onnotify("canswapbind", function()
+    
+    self:onnotify("tpbind", function()
         if self:getstance() == "crouch" then
-            self:canswap()
+            self:tp()
         end end)
+
+    self:onnotify("tpbind", function()
+        if self:getstance() == "prone" then
+            self:tpsave()
+        end end)
+
     self:onnotify("refillbind", function()
         if self:getstance() == "crouch" then
             self:refill()
         end end)
+
     --host only controls
+
     if self:ishost() == 1 then
         self:notifyonplayercommand("savebind", "+actionslot 4")
         self:notifyonplayercommand("modebind", "+actionslot 1")
@@ -133,6 +142,26 @@ function entity:savepos()
     self:clientiprintln("Bot Spawn ^:Saved")
 end
 
+-- wip attempt at save and load for the player
+
+function entity:tpsave()
+    local forward = self:gettagorigin("j_head")
+    local endvec = game:anglestoforward(self:getplayerangles())
+    local endd = endvec:scale(1000000)
+    local cross = game:bullettrace(forward, endd, 0, self)["position"]
+    game:executecommand("selfx " .. cross.x)
+    game:executecommand("selfy " .. cross.y)
+    game:executecommand("selfz " .. cross.z)
+    self:clientiprintln("Position : ^2Saved")
+end
+
+function entity:tp()
+
+    local savetp = vector:new(game:getdvarint("selfx"), game:getdvarint("selfy"), game:getdvarint("selfz"))
+    self:setorigin(savep)           
+     
+end
+
 function entity:loadpos()
     if tostring(game:getdvar("savemap")) == damap and game:getdvar("botx") ~= "no" then
         for i, player in ipairs(players) do
@@ -156,6 +185,7 @@ function entity:refill()
     self:givestartammo(self:getcurrentoffhand())
     self:givestartammo(self:getoffhandsecondaryclass())
 end
+
 
 function entity:canswap()
     self:giveweapon("h1_rpd_mp_a#acog_f#base")
