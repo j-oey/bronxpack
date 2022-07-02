@@ -70,9 +70,9 @@ end
 
 function entity:binds()
     --all player controls
-    self:notifyonplayercommand("canswapbind", "+actionslot 1")
+    self:notifyonplayercommand("tpbind", "+melee")
     self:notifyonplayercommand("refillbind", "+melee_zoom")
-    self:notifyonplayercommand("refillbind", "+melee")
+ 
     
     self:onnotify("tpbind", function()
         if self:getstance() == "crouch" then
