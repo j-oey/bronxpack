@@ -178,10 +178,10 @@ end)
 
 --shoutout lurkzy
 changeclass_wrapper = game:detour("maps/mp/gametypes/_menus", "_id_5BB2", function(self_, team)
-    self_:scriptcall("maps/mp/gametypes/_class", "setClass", self_.pers["class"])
+    self_:scriptcall("maps/mp/gametypes/_class", "setclass", self_.pers["class"])
     self_.tag_stowed_back = nil
     self_.tag_stowed_hip = nil
-    self_:scriptcall("maps/mp/gametypes/_class", "giveLoadout", team, self_.pers["class"], 1)
+    self_:scriptcall("maps/mp/gametypes/_class", "giveloadout", team, self_.pers["class"], 1)
     changeclass_wrapper.invoke(self_, team)
     game:ontimeout(function()
         self_:clientiprintlnbold("  ")
