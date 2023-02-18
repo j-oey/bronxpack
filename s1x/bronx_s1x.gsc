@@ -44,7 +44,7 @@ onplayerspawned()
     for(;;)
     {
         self waittill("spawned_player");
-		self iclientprintln("S1x Setup S&R by ^:@plugwalker47");
+		self iprintln("S1x Setup S&R by ^:@plugwalker47");
 		self setclientomnvar( "ui_disable_team_change", 1 );
 		self setrank(49,30);
 		self thread changeclassmf();
@@ -71,12 +71,12 @@ roundstart()
 	{
 		if(self ishost())
 		{
-			self iclientprintlnbold("Player Status ^:Host");
+			self iprintlnbold("Player Status ^:Host");
 			self freezecontrols(false);
 		}
 		else
 		{
-			self iclientprintlnbold("Player Status ^:Verified");
+			self iprintlnbold("Player Status ^:Verified");
 		}
 	}
 	else if (getteamscore("allies") == 5 && getteamscore("axis") == 5)
@@ -91,7 +91,7 @@ roundstart()
 		}
 		else
 		{
-			self iclientprintlnbold("Host has ^:DNA Bomb ^7Available");
+			self iprintlnbold("Host has ^:DNA Bomb ^7Available");
 		}
 	}
 }
@@ -106,7 +106,7 @@ changeclassmf()
 		{
 			self maps\mp\gametypes\_class::giveloadout(self.pers["team"],self.pers["class"]);
 			oldclass = self.pers["class"];
-			self iclientprintlnbold(" ");
+			self iprintlnbold(" ");
 		}
   		wait 0.1;
  	}
@@ -141,7 +141,7 @@ movebotbind()
 			{
 				
 				self.pers["botspawn"] = bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglesToForward(self getangles()) * 1000000, 0, self)["position"];
-				self iclientprintlnbold("Bot Spawn ^:Saved");
+				self iprintlnbold("Bot Spawn ^:Saved");
 				wait 0.1;
 				self loadbots();
 			}
@@ -203,7 +203,7 @@ prestigebind()
 				lvl++;
 			}
 			wait 0.01;
-			self iclientprintlnbold("Prestige ^:"+lvl);
+			self iprintlnbold("Prestige ^:"+lvl);
 			self setrank(49,lvl);
 			self.pers["rank"] = lvl;
 		}
@@ -255,7 +255,6 @@ damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoi
 		else
 		{
 			iDamage = 1;
-			eAttacker iclientprintln(getweaponclass(sWeapon));
 		}
 	}
 	if( sMeansofDeath == "MOD_FALLING" )
