@@ -12,4 +12,5 @@ Features:
 
 Issues:
 -authorization is team based, always pick black ops and always add bot to cdp
+(change team assignment to open in global settings, so everyone can be on the right team)
 -hud is weird on pc (i tried to fix but it isnt perfect)
