@@ -4,7 +4,7 @@
 -if you are having trouble please read all of the documentation i provided, it may be a lot but trust me it is worth it <br />
 # FAQ
 Q- how do we connect to eachother on plutonium? <br />
-A- add them via https://forum.plutonium.pw and join/invite with the in game friends list <br />
+A- add them via [Plutonium Fourm](https://forum.plutonium.pw and join/invite with the in game friends list) <br />
  <br />
 Q- why can we not connect to eachother even with radmin? <br />
 A- try another host or restart your game/pc <br />
@@ -45,11 +45,11 @@ S1x <br />
 -place bronx_s1x.gsc in s1x_full_game\scripts (s1x_full_game) is whatever your game folder is <br />
 T5 Plutonium - https://twitter.com/plugwalker47/status/1533631002601455616 <br />
 -put bronx.gsc in %localappdata%\Plutonium\storage\t5\scripts <br />
-IW5 Plutonium - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-iw5 <br />
+IW5 Plutonium - [Loading Existing Mods on IW5](https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-iw5) <br />
 -put bronx_iw5.gsc in %localappdata%\Plutonium\storage\iw5\scripts <br />
-T6 Plutonium - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-t6 <br />
+T6 Plutonium - [Loading Existing Mods on T6](https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-t60) <br />
 -put bronx_t6.gsc in %localappdata%\Plutonium\storage\t6\scripts\mp <br />
-BO3 Steam - https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-t6 <br />
+BO3 Steam - [BO3 GSC Script Injector/Compiler](https://www.youtube.com/watch?v=7MepTbdJlmU&ab_channel=Serious) <br />
 -install the compiler and follow the tutorial showing how to run scripts <br />
 	-open project i made <br />
 	-inject in prgame lobby <br />
