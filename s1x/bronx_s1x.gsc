@@ -253,7 +253,6 @@ damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoi
 		if ( validweapon( sWeapon ) ) 
 		{
 			iDamage = 999;
-			level.ingraceperiod = 0;
 		}
 		else
 		{
@@ -264,6 +263,7 @@ damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoi
 	{
 		iDamage = 0;
 	}
+	level.ingraceperiod = 0;
 	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 }
 
