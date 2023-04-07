@@ -198,7 +198,7 @@ refillbind()
 
 prestigebind()
 {
-	if(!isdefined(self.pers["prest"])
+	if(!isdefined(self.pers["prest"]))
 	{
 	    self.pers["prest"] = 10;	   
 	}
