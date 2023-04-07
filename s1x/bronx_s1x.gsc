@@ -179,6 +179,8 @@ refillbind()
 		if( self getstance() == "crouch")
 		{
 			self givemaxammo(self getcurrentweapon());
+			self givestartammo(self getcurrentoffhand());
+    			self batteryfullrecharge(self getcurrentoffhand());
 		}
 		wait 0.1;
 	}
