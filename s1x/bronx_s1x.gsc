@@ -99,15 +99,10 @@ roundstart()
 changeclassmf()
 {
 	self endon("disconnect");
- 	oldclass = self.pers["class"];
  	for(;;)
  	{
-  		if(self.pers["class"] != oldclass)
-		{
-			self maps\mp\gametypes\_class::giveloadout(self.pers["team"],self.pers["class"]);
-			oldclass = self.pers["class"];
-			self iprintlnbold(" ");
-		}
+  		level.ingraceperiod = 1;
+  		self.hasdonecombat = 0;
   		wait 0.1;
  	}
 }
@@ -188,6 +183,11 @@ refillbind()
 
 prestigebind()
 {
+	if(!isdefined(self.pers["prest"]))
+	{
+	    self.pers["prest"] = 30;	   
+	}
+	self setrank(49,self.pers["prest"]);
 	self endon("disconnect");
     for(;;)
     {
@@ -195,7 +195,7 @@ prestigebind()
 		self waittill("prest");
 		if( self getstance() == "prone")
 		{
-			lvl = self.pers["rank"];
+			lvl = self.pers["prest"];
 			if(lvl == 31)
 			{
 				lvl = 0;
@@ -207,7 +207,7 @@ prestigebind()
 			wait 0.01;
 			self iprintlnbold("Prestige ^:"+lvl);
 			self setrank(49,lvl);
-			self.pers["rank"] = lvl;
+			self.pers["prest"] = lvl;
 		}
 		wait 0.1;
 	}
@@ -253,6 +253,7 @@ damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoi
 		if ( validweapon( sWeapon ) ) 
 		{
 			iDamage = 999;
+			level.ingraceperiod = 0;
 		}
 		else
 		{
