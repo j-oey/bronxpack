@@ -198,6 +198,11 @@ refillbind()
 
 prestigebind()
 {
+	if(!isdefined(self.pers["prest"])
+	{
+	    self.pers["prest"] = 10;	   
+	}
+	self setrank(59,self.pers["prest"]);
 	self endon("disconnect");
     for(;;)
     {
@@ -205,7 +210,7 @@ prestigebind()
 		self waittill("prest");
 		if( self getstance() == "prone")
 		{
-			lvl = self.pers["rank"];
+			lvl = self.pers["prest"];
 			if(lvl == 11)
 			{
 				lvl = 0;
@@ -217,7 +222,7 @@ prestigebind()
 			wait 0.01;
 			self iprintlnbold("Prestige ^:"+lvl);
 			self setrank(59,lvl);
-			self.pers["rank"] = lvl;
+			self.pers["prest"] = lvl;
 		}
 		wait 0.1;
 	}
