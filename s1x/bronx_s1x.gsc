@@ -98,13 +98,20 @@ roundstart()
 
 changeclassmf()
 {
-	self endon("disconnect");
- 	for(;;)
- 	{
-  		level.ingraceperiod = 1;
-  		self.hasdonecombat = 0;
-  		wait 0.1;
- 	}
+    self endon("disconnect");
+    for(;;)
+    {
+        self waittill("luinotifyserver",var_00,var_01);
+        if(var_00 == "class_select" && var_01 < 60)
+        {
+	    self.class = "custom" + (var_01 + 1);
+	    maps\mp\gametypes\_class::setclass(self.class);
+	    self.tag_stowed_back = undefined;
+	    self.tag_stowed_hip = undefined;
+	    maps\mp\gametypes\_class::giveandapplyloadout(self.teamname,self.class);
+            self setviewmodel("viewhands_player_sentinel");
+        }
+    }
 }
 
 botfreezer()
@@ -263,7 +270,6 @@ damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoi
 	{
 		iDamage = 0;
 	}
-	level.ingraceperiod = 0;
 	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 }
 
