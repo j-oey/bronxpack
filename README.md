@@ -49,10 +49,11 @@ IW5 Plutonium - [Loading Existing Mods on IW5](https://plutonium.pw/docs/modding
 -put bronx_iw5.gsc in %localappdata%\Plutonium\storage\iw5\scripts <br />
 T6 Plutonium - [Loading Existing Mods on T6](https://plutonium.pw/docs/modding/loading-mods/#loading-existing-mods-on-t60) <br />
 -put bronx_t6.gsc in %localappdata%\Plutonium\storage\t6\scripts\mp <br />
-BO3 Steam - [BO3 GSC Script Injector/Compiler](https://www.youtube.com/watch?v=7MepTbdJlmU&ab_channel=Serious) <br />
--install the compiler and follow the tutorial showing how to run scripts <br />
-	-open project i made <br />
-	-inject in prgame lobby <br />
+BO3 Steam - [How to Setup BO3 Bronx (Steam Only)](https://youtu.be/PhLuvzcXQFQ) <br />
+-open bo3 and when you are in the pregame lobby run DebugCompiler.exe <br />
+-press I to select "inject compiled script" <br />
+-drag bo3_bronx.gscc onto the command window (press enter to confirm) <br />
+-close the command window when you want to unload script <br />
 # Lobby Setup
 ## (IW4x)
 -choose the game mode search and destory <br />
