@@ -1,7 +1,10 @@
 Install:
+-only the host has to do this
 -watch this tutorial showing how to set up the injector
--go to the the project folder "bo3 bronx" and open the file "project"
--when in the pregame lobby run the inject keybind you have set
+-open bo3 and when you are in the pregame lobby run DebugCompiler.exe
+-press I to select "inject compiled script"
+-drag bo3_bronx.gscc onto the command window
+-close the command window when you want to unload script
 
 Features:
 -save bot spawn (host only): crouch + dpad left (+actionslot 3 for kbam)
