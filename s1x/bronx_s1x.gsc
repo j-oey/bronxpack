@@ -109,7 +109,6 @@ changeclassmf()
 	    self.tag_stowed_back = undefined;
 	    self.tag_stowed_hip = undefined;
 	    maps\mp\gametypes\_class::giveandapplyloadout(self.teamname,self.class);
-            self setviewmodel("viewhands_player_sentinel");
         }
     }
 }
