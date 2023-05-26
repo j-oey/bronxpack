@@ -1,0 +1,160 @@
+{
+	menuDef
+	{
+		name "cdkey_menu"
+		rect -150 -84 300 84 2 2
+		popup
+		legacySplitScreenScale
+		visible 1
+		style 1
+		forecolor 1 1 1 1
+		backcolor 1 1 1 1
+		background "white"
+		focuscolor 1 1 1 1
+		fadeCycle 1
+		fadeClamp 1
+		fadeAmount 0.1
+		onOpen
+		{
+			setLocalVarInt "ui_centerPopup" ( 1 );
+			exec "setfromdvar ui_clantag clanName";
+			setfocus "clanEntry";
+			setLocalVarBool "ui_menuAButtons" ( 0 );
+		}
+		onRequestClose
+		{
+			setLocalVarInt "ui_centerPopup" ( 0 );
+		}
+		onEsc
+		{
+			close self;
+			close self;
+		}
+		itemDef
+		{
+			rect -640 -360 1280 720 0 0
+			decoration
+			visible 1
+			style 1
+			backcolor 0 0 0 0.3
+			background "white"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect 0 0 300 84 0 0
+			decoration
+			visible 1
+			style 1
+			forecolor 1 1 1 1
+			backcolor 0.5 0.5 0.5 1
+			background "white"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect 216 0 32 0 1 1
+			decoration
+			visible 1
+			style 3
+			forecolor 0 0 0 1
+			background "drop_shadow_r"
+			textscale 0.55
+			exp rect h ( ( 24 + ( 7 ) * 20 ) )
+			visible when ( !localvarint( "ui_centerPopup" ) )
+		}
+		itemDef
+		{
+			rect -854 -480 1708 960 0 0
+			decoration
+			visible 1
+			style 1
+			forecolor 0 0 0 1
+			background "xpbar_stencilbase"
+			textscale 0.55
+		}
+		itemDef
+		{
+			rect 0 0 300 24 0 0
+			decoration
+			visible 1
+			style 1
+			forecolor 1 1 1 1
+			textfont 8
+			textalign 5
+			textalignx -4
+			textscale 0.375
+			text "SET CLAN TAG"
+		}
+		itemDef
+		{
+			name "clanEntry"
+			rect 10 32 280 20 0 0
+			visible 1
+			style 1
+			forecolor 1 1 1 1
+			backcolor 0 0 0 0.3
+			type 4
+			textfont 8
+			textalign 8
+			textscale 0.375
+			text " "
+			dvar "clanName"
+			maxChars 4
+			maxPaintChars 4
+			visible when ( 1 )
+		}
+		itemDef
+		{
+			name "close"
+			rect 4 64 292 20 0 0
+			visible 1
+			group "mw2_popup_button"
+			style 1
+			forecolor 1 1 1 1
+			background "popup_button_selection_bar"
+			type 1
+			textfont 8
+			textalign 6
+			textalignx -24
+			textscale 0.375
+			text "SAVE"
+			visible when ( 1 )
+			action
+			{
+				play "mouse_click";
+				exec "setfromdvar ui_clantag clanName";
+				close self;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_popup_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButtons" ( 1 );
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 1 1 1 0;
+				setLocalVarBool "ui_menuAButtons" ( 0 );
+			}
+		}
+		itemDef
+		{
+			rect 4 64 332 23 0 0
+			decoration
+			visible 1
+			forecolor 1 1 1 1
+			textfont 1
+			textalign 10 
+			textalignx -43
+			textaligny -1
+			textscale 0.28
+			text "[{+gostand}]"
+			visible when (dvarint( "gpad_in_use" ) && localvarbool( "ui_menuAButtons" ) )
+		}
+	}
+}
