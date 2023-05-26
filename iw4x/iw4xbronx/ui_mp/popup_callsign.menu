@@ -333,6 +333,7 @@
 			style 1
 			forecolor 1 1 1 1
 			textfont 3
+			textstyle 8
 			textalign 8
 			textalignx 8
 			textscale 0.375
@@ -649,7 +650,7 @@
 		}
 		itemDef
 		{
-			rect -64 64 280 1 1 1
+			rect -64 84 280 1 1 1
 			decoration
 			visible 1
 			style 3
@@ -660,8 +661,49 @@
 		}
 		itemDef
 		{
-			name "settings_change_cas"
+			name "settings_change_clan"
 			rect -64 64 336 20 1 1
+			visible 1
+			group "mw2_popup_button"
+			style 1
+			forecolor 1 1 1 1
+			disablecolor 0.6 0.55 0.55 1
+			background "menu_button_selection_bar"
+			type 1
+			textfont 3
+			textalign 6
+			textalignx -60
+			textscale 0.375
+			text "@MPUI_CLAN_TAG_CAPS"
+			visible when ( 1 )
+			disabled when ( !isitemunlocked( "cas" ) )
+			action
+			{
+				play "mouse_click";
+				open "cdkey_menu";
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_popup_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+				setLocalVarBool "ui_menuAButton" ( 1 );
+				setLocalVarInt "ui_abuttonpos" ( 64 );
+				setLocalVarString "ui_hint_text" ( "@MPUI_DESC_KILLSTREAK_REWARDS" );
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 1 1 1 0;
+				setLocalVarBool "ui_menuAButton" ( 0 );
+			}
+		}
+		itemDef
+		{
+			name "settings_change_cas"
+			rect -64 84 336 20 1 1
 			visible 1
 			group "mw2_popup_button"
 			style 1
@@ -690,7 +732,7 @@
 				}
 				setItemColor self backcolor 0 0 0 1;
 				setLocalVarBool "ui_menuAButton" ( 1 );
-				setLocalVarInt "ui_abuttonpos" ( 64 );
+				setLocalVarInt "ui_abuttonpos" ( 84 );
 				if ( isitemunlocked( "cas" ) )
 				{
 					setLocalVarString "ui_hint_text" ( "@MPUI_DESC_KILLSTREAK_REWARDS" );
