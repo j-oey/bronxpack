@@ -337,7 +337,7 @@
 			textscale 0.28
 			text "[{+gostand}]"
 			exp rect y ( getfocuseditemy( ) )
-			visible when (dvarint( "gpad_in_use" ) && localvarbool( "ui_menuAButton" ) )
+			visible when (dvarint( "gpad_in_use" ) && localvarbool( "ui_popupAButton" ) )
 		}
 	}
 }
