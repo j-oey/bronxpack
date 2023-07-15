@@ -5,17 +5,12 @@ Install:
 Features:
 -snipers kill with one bullet
 -teams are auto assigned on player connect
--save bot spawn (host only): crouch + dpad left (+actionslot 3 for kbam)
+-toggle setup/unsetup mode (host only): crouch + dpad left (+actionslot 3 for kbam)
 -drop canswap: crouch + dpad up (+actionslot 1 for kbam)
 -give killstreaks: prone + dpad up (+actionslot 1 for kbam)
 -refill ammo: crouch + knife 
+-if on grapple map, equip exo overclock to get grapple hooks
 -cycle prestige: prone + dpad down (+actionslot 2 for kbam)
 
 Issues:
--s1x requires you to add a bot in the game settings menu, dont use "spawnbot 1"
--game doesnt read rounds properly so it doesnt give dna bomb on last round
--mid game change class is broken for some reason (it used to work)
--prestige doesnt save between rounds (persistence issue idk)
--refill ammo doesnt work for equipment (again gsc is not very cooperative on here)
-
-*always check the github page for the most updated version
+-none known currently
