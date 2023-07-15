@@ -110,7 +110,6 @@ changeclassmf()
   		if(self.pers["class"] != oldclass)
 		{
 			self maps\mp\gametypes\_class::giveloadout(self.pers["team"],self.pers["class"]);
-			self iprintln("test"+ self.pers["rank"]);
 			oldclass = self.pers["class"];
 			self giveperk("specialty_bulletaccuracy",false);
 			self giveperk("specialty_quickswap",false);
