@@ -332,8 +332,10 @@ callbackPlayerDamage_stub(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		if(self.team != eAttacker.team)
 		{
 			eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
+			return;
 		}
 	}
+	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 }
 
 validweapon(weapon)
