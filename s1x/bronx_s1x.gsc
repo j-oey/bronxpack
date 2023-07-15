@@ -303,7 +303,7 @@ callbackPlayerDamage_stub(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 {
 	if(sMeansofDeath != "MOD_FALLING" && sMeansofDeath != "MOD_TRIGGER_HURT" && sMeansofDeath != "MOD_SUICIDE") 
 	{
-		if(validweapon(sWeapon)) 
+		if(validweapon(sWeapon))
 		{
 			[[level.callDamage]]( eInflictor, eAttacker, 999, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 			return;
@@ -311,8 +311,10 @@ callbackPlayerDamage_stub(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		if(self.team != eAttacker.team)
 		{
 			eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
+			return;
 		}
 	}
+	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 }
 
 validweapon(weapon)
