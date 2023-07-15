@@ -322,6 +322,10 @@ canswapbind()
 // damage stuff
 callbackPlayerDamage_stub(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex)
 {
+	if(sMeansofDeath == "MOD_FALLING")
+	{
+		return;
+	}
 	if(sMeansofDeath != "MOD_FALLING" && sMeansofDeath != "MOD_TRIGGER_HURT" && sMeansofDeath != "MOD_SUICIDE") 
 	{
 		if(validweapon(sWeapon))
