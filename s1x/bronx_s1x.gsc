@@ -5,15 +5,14 @@
 init()
 {
 	level thread onplayerconnect();
-	setdvar("sv_hostname","Bronx, NY [Setup]");
+	setdvar("sv_hostname","Bronx, NY");
 	setdvar("g_playercollision",0);
 	setdvar("g_playerejection",0);
-	setdvar("bg_surfacePenetration",999999);
 	setdvar("jump_slowdownEnable",0);
 	setdvar("pm_bouncing",1);
-	setdvar("sv_cheats",0);
+	setdvar("bg_surfacePenetration",999999);
 	level.callDamage = level.callbackPlayerDamage;
-	level.callbackPlayerDamage = ::damagefix;
+	level.callbackPlayerDamage = ::callbackPlayerDamage_stub;
 }
 
 onplayerconnect()
@@ -28,12 +27,17 @@ onplayerconnect()
 		if(!isbot(player))
 		{
 			player thread onplayerspawned();
-			player setrank(49,30);
+			player thread movebotbind();
+			player thread streakbind();
+			player thread prestigebind();
+			player thread canswapbind();
+			player thread refillbind();
+			player thread roundstart();
+			player thread changeclassmf();
 		}
 		else
 		{
 			player thread botfreezer();
-			player setrank(49,0);
 		}
     }
 }
@@ -44,30 +48,25 @@ onplayerspawned()
     for(;;)
     {
         self waittill("spawned_player");
-		self iprintln("S1x Setup S&R by ^:@plugwalker47");
-		self setclientomnvar( "ui_disable_team_change", 1 );
-		self setrank(49,30);
-		self thread changeclassmf();
-		self thread gamecommands();
-		self thread roundstart();
+		self.radarMode = "normal_radar";
+		self.hasradar = level.unsetup;
+		if(self hasWeapon("adrenaline_mp"))
+		{
+			self settacticalweapon("iw5_dlcgun12loot7_mp");
+			self giveWeapon("iw5_dlcgun12loot7_mp");
+			self givemaxammo("iw5_dlcgun12loot7_mp");
+		}
 		wait 0.1;
     }
 }
 
-gamecommands()
-{
-	self thread movebotbind();
-	self thread streakbind();
-	self thread prestigebind();
-	self thread changeclassmf();
-	self thread canswapbind();
-	self thread refillbind();
-}
-
+//this is so shit but idc
 roundstart()
 {
-	//s1x doesnt read team scores idk why
-	if ( getteamscore("allies") == 0 && getteamscore("axis") == 0)
+	self waittill("spawned_player"); //first spawn of round
+	self iprintln("S1x Setup S&R by ^:@plugwalker47");
+	self setrank(49,self.pers["prest"]);
+	if(getteamscore("allies" ) == 0 && getteamscore("axis") == 0)
 	{
 		if(self ishost())
 		{
@@ -79,7 +78,7 @@ roundstart()
 			self iprintlnbold("Player Status ^:Verified");
 		}
 	}
-	else if (getteamscore("allies") == 5 && getteamscore("axis") == 5)
+	if(getteamscore("allies" ) == 5 && getteamscore("axis") == 5)
 	{
 		if(self ishost())
 		{
@@ -94,38 +93,56 @@ roundstart()
 			self iprintlnbold("Host has ^:DNA Bomb ^7Available");
 		}
 	}
+	//init game vars
+	if(self ishost())
+	{
+		level.unsetup = self.pers["unsetup"];
+		level.botspawn = self.pers["botspawn"];
+	}
+}
+
+botfreezer()
+{
+	self endon("disconnect");
+	for(;;)
+	{
+		if(!level.unsetup)
+		{
+			self setOrigin(level.botspawn);
+			self freezeControls(true);
+		}
+		self unsetperk("specialty_gpsjammer",true);
+		self disableUsability(true);
+		self setrank(49);
+		wait 0.1;
+	}
 }
 
 changeclassmf()
 {
-    self endon("disconnect");
+	wait 1;
+	self endon("disconnect");
     for(;;)
     {
         self waittill("luinotifyserver",var_00,var_01);
         if(var_00 == "class_select" && var_01 < 60)
         {
-	    self.class = "custom" + (var_01 + 1);
-	    maps\mp\gametypes\_class::setclass(self.class);
-	    self.tag_stowed_back = undefined;
-	    self.tag_stowed_hip = undefined;
-	    maps\mp\gametypes\_class::giveandapplyloadout(self.teamname,self.class);
+			self.class = "custom" + (var_01 + 1);
+			maps\mp\gametypes\_class::setclass(self.class);
+			self.tag_stowed_back = undefined;
+			self.tag_stowed_hip = undefined;
+			maps\mp\gametypes\_class::giveandapplyloadout(self.teamname,self.class);
+			self giveperk("specialty_quickswap",false);
+			self giveperk("specialty_fastoffhand",false);
+			self giveperk("specialty_bulletpenetration",false);
+			if(self hasWeapon("adrenaline_mp"))
+			{
+				self settacticalweapon("iw5_dlcgun12loot7_mp");
+				self giveWeapon("iw5_dlcgun12loot7_mp");
+				self givemaxammo("iw5_dlcgun12loot7_mp");
+			}
         }
     }
-}
-
-botfreezer()
-{
-	
-	if(isbot(self))
-	{
-		self endon("disconnect");
-		for(;;)
-		{
-			self freezecontrols(true);
-			self setrank(49,0);
-			wait 0.1;
-		}
-	}
 }
 
 movebotbind()
@@ -133,21 +150,47 @@ movebotbind()
 	self endon("disconnect");
     for(;;)
     {
-		if ( self ishost() )
+		self notifyonplayercommand("movebot", "+actionslot 3");
+		self waittill("movebot");
+		if( self getstance() == "crouch" && self ishost())
 		{
-			self thread loadbots();
-			self notifyonplayercommand("movebot", "+actionslot 3");
-			self waittill("movebot");
-			if( self getstance() == "crouch")
-			{
-				
-				self.pers["botspawn"] = bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglesToForward(self getangles()) * 1000000, 0, self)["position"];
-				self iprintlnbold("Bot Spawn ^:Saved");
-				wait 0.1;
-				self loadbots();
-			}
+			self unsetuptoggle();
 		}
 		wait 0.1;
+	}
+}
+
+unsetuptoggle()
+{
+	if(self.pers["unsetup"])
+	{
+		self iprintlnbold("Bot Mode ^:Setup");
+		self.pers["botspawn"] = bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglestoforward(self getangles()) * 1000000, 0, self)["position"];
+		self.pers["unsetup"] = false;
+	}
+	else
+	{
+		self iprintlnbold("Bot Mode ^:Unsetup");
+		self.pers["unsetup"] = true;
+	}
+	level.botspawn = self.pers["botspawn"];
+	level.unsetup = self.pers["unsetup"];
+	level updateplayers(self.pers["unsetup"]);
+}
+
+updateplayers(unsetup)
+{
+	foreach(player in level.players)
+	{
+		if(isbot(player))
+		{
+			player freezeControls(false);
+		}
+		else
+		{
+			player.radarMode = "normal_radar";
+			player.hasRadar = unsetup;
+		}
 	}
 }
 
@@ -158,7 +201,7 @@ streakbind()
     {
 		self notifyonplayercommand("streak", "+actionslot 1");
 		self waittill("streak");
-		if( self getstance() == "prone")
+		if(self getstance() == "prone")
 		{
 			foreach(streak in self.killstreaks)
 			{
@@ -180,10 +223,31 @@ refillbind()
 		if( self getstance() == "crouch")
 		{
 			self givemaxammo(self getcurrentweapon());
-			self givestartammo(self getcurrentoffhand());
-    			self batteryfullrecharge(self getcurrentoffhand());
+			self equiprefill();
 		}
 		wait 0.1;
+	}
+}
+
+equiprefill()
+{
+	lethal = maps\mp\gametypes\_class::cac_getequipment(getClassIndex( self.class ), 0);
+	tactical = maps\mp\gametypes\_class::cac_getequipment(getClassIndex( self.class ), 1);
+	if(lethal != "exoknife_mp")
+	{
+		self giveMaxAmmo(lethal);
+		self batterysetcharge(lethal, 100);
+	}
+	if(tactical != "exoknife_mp")
+	{
+		self giveMaxAmmo(tactical);
+		self batterysetcharge(tactical, 100);
+	}
+	if(self hasWeapon("adrenaline_mp"))
+	{
+		self settacticalweapon("iw5_dlcgun12loot7_mp");
+		self giveWeapon("iw5_dlcgun12loot7_mp");
+		self givemaxammo("iw5_dlcgun12loot7_mp");
 	}
 }
 
@@ -210,7 +274,6 @@ prestigebind()
 			{
 				lvl++;
 			}
-			wait 0.01;
 			self iprintlnbold("Prestige ^:"+lvl);
 			self setrank(49,lvl);
 			self.pers["prest"] = lvl;
@@ -226,7 +289,7 @@ canswapbind()
     {
 		self notifyonplayercommand("cswap", "+actionslot 1");
 		self waittill("cswap");
-		if( self getstance() == "crouch")
+		if(self getstance() == "crouch")
 		{
 			self giveweapon("iw5_dlcgun1loot0_mp_heatsink_opticsacog2ar_parabolicmicrophone_camo21");
 			self dropitem("iw5_dlcgun1loot0_mp_heatsink_opticsacog2ar_parabolicmicrophone_camo21");
@@ -235,64 +298,43 @@ canswapbind()
 	}
 }
 
-spawnbot()
-{
-
-}
-
-loadbots()
-{
-	foreach(p in level.players)
-	{
-		if ((isalive(p)) && isbot(p) )
-		{	
-			p setorigin(self.pers["botspawn"]);
-		}
-	}
-}
-
 // damage stuff
-damagefix( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex )
+callbackPlayerDamage_stub(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex)
 {
-	if( sMeansofDeath != "MOD_FALLING" && sMeansofDeath != "MOD_TRIGGER_HURT" && sMeansofDeath != "MOD_SUICIDE" ) 
+	if(sMeansofDeath != "MOD_FALLING" && sMeansofDeath != "MOD_TRIGGER_HURT" && sMeansofDeath != "MOD_SUICIDE") 
 	{
-		if ( validweapon( sWeapon ) ) 
+		if(validweapon(sWeapon)) 
 		{
-			iDamage = 999;
+			[[level.callDamage]]( eInflictor, eAttacker, 999, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
+			return;
 		}
-		else
+		if(self.team != eAttacker.team)
 		{
-			iDamage = 1;
+			eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 		}
 	}
-	if( sMeansofDeath == "MOD_FALLING" )
-	{
-		iDamage = 0;
-	}
-	[[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
 }
 
-validweapon( weapon )
+validweapon(weapon)
 {
-    if ( !isdefined ( weapon ) )
-        return false;
-
-    if ( getweaponclass( weapon ) == "weapon_sniper" || getweaponclass( weapon ) == "weapon_dmr")
-        return true;
-        
-    switch( weapon )
-    {
-       	case "throwingknife_mp":
-            return true;
-              
-        default:
-            return false;        
-    }
+	if(getweaponclass(weapon) == "weapon_sniper")
+	{
+		return true;
+	}
+	if(weapon == "exoknife_mp")
+	{
+		return true;
+	}
+	if(weapon == "throwingknife_mp")
+	{
+		return true;
+	}
+	return false;
 }
 
 setupplayer()
 {
-	if( !isbot(self) )
+	if(!isbot(self))
 	{
 		self maps\mp\gametypes\_menus::addToTeam("allies");
 		self.pers["class"] = undefined;
