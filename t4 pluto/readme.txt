@@ -13,6 +13,6 @@ drop canswap = prone + knife
 
 -bot spawns automatically on first round
 -last stand is disabled for bots
--all snipers are one shot kill and everything else does no damage
+-all bolt action and semi auto rifles are one shot kill and everything else does no damage
 -fall damage is disabled
 -killcam is added, but does not slow down like the console mod
